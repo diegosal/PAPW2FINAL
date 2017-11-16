@@ -16,8 +16,9 @@ class CreateTheoryTable extends Migration
         Schema::create('theory', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trainingId')->unsigned();
-            $table->foreign('trainingId')->references('id')->on('training');
+            $table->foreign('trainingId')->references('id')->on('training')->onDelete('cascade');
             $table->string('url');
+            $table->string('description');
             $table->timestamps();
         });       
     }

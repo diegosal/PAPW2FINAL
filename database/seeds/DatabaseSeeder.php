@@ -22,10 +22,7 @@ class DatabaseSeeder extends Seeder
             'password'       => bcrypt('123'),
             'remember_token' => str_random(10),
             'sex'            => 1,
-            'age'            => 25,
             'birth'          => '1991-01-01',
-            'address'        => 'Donde sea vi lugar',
-            'avatar'         => ''
         ]);
 
     }

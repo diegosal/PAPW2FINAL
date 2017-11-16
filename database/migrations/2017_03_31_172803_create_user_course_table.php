@@ -17,8 +17,10 @@ class CreateUserCourseTable extends Migration
             $table->increments('id');
             $table->integer('UserId')->unsigned();
             $table->integer('trainingId')->unsigned();
-            $table->foreign('UserId')->references('id')->on('users');
-            $table->foreign('trainingId')->references('id')->on('training');
+            $table->foreign('UserId')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('trainingId')->references('id')->on('training')->onDelete('cascade');
+            $table->integer('correctAnswers');
+            $table->integer('wrongAnswers');
             $table->timestamps();
         });       
     }

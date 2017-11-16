@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable, Filterable;
-
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
@@ -21,12 +21,9 @@ class User extends Authenticatable
         'email',
         'password',
         'sex',
-        'age',
-        'birth',
-        'address',
-        'avatar',
+        'birth'
     ];
-
+    protected $guarded = ['id'];
     protected $casts = [
         'typeUserId' => 'integer',
         'sex' => 'integer'
