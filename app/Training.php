@@ -19,4 +19,31 @@ class Training extends Model
         'name'
     ];
     protected $guarded = ['id'];
+
+    public function userCourse()
+    {
+        return $this->hasMany(
+            'App\UserCourse',
+            'trainingId',
+            'id'
+        );
+    }
+
+    public function theory()
+    {
+        return $this->hasMany(
+            'App\Theory',
+            'trainingId',
+            'id'
+        );
+    }
+
+    public function question()
+    {
+        return $this->hasMany(
+            'App\Question',
+            'trainingId',
+            'id'
+        );
+    }
 }

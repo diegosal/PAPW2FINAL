@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         DB::table('typeUser')->insert([
             'type' => str_random(10)
         ]);
-
+        
         DB::table('users')->insert([
             'name'           => 'Diego Gonzalez',
             'typeUserId'     => 1,
@@ -24,6 +24,14 @@ class DatabaseSeeder extends Seeder
             'sex'            => 1,
             'birth'          => '1991-01-01',
         ]);
-
+        DB::table('training')->insert([
+            'name' => str_random(10)
+        ]);
+        DB::table('userCourse')->insert([
+            'UserId' => 1,
+            'trainingId' => 1,
+            'correctAnswers' => 0,
+            'wrongAnswers' => 0,
+        ]);
     }
 }

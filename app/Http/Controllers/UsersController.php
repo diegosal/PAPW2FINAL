@@ -12,7 +12,9 @@ class UsersController extends Controller
 {
     public function index(UserFilter $filter)
     {
-        return User::filter($filter)->paginate();
+        return User::with(
+            'TypeUser:id,type')
+        ->get();
     }
 
     public function store()
@@ -23,9 +25,7 @@ class UsersController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:4',
             'sex' => 'required',
-            'age' => 'required|integer|min:1',
             'birth' => 'required|date',
-            'address' => 'required',
         ]);
 
         User::create(request()->all());
@@ -38,13 +38,11 @@ class UsersController extends Controller
     public function update(User $user)
     {
         $this->validate(request(), [
-            'typeUserId' => 'required',
+            'typeUserId' => 'sometimes|required',
             'name' => 'sometimes|required',
             'email' => ['sometimes', 'required', 'email', Rule::unique('users')->ignore($user->id)],
             'sex' => 'sometimes|required',
-            'age' => 'sometimes|required|integer|min:1',
             'birth' => 'sometimes|required|date',
-            'address' => 'sometimes|required',
         ]);
 
         $user->fill(request()->all())->save();

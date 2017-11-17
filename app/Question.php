@@ -16,12 +16,29 @@ class Question extends Model
      * @var array
      */
     protected $fillable = [
-        'surveyId',
+        'trainingId',
         'question',
     ];
     protected $guarded = ['id'];
     protected $casts = [
-        'surveyId' => 'integer'
+        'trainingId' => 'integer'
     ];
+
+    public function training()
+    {
+        return $this->belongsTo(
+            'App\Training',
+            'trainingId'
+        );
+    }
+
+    public function answer()
+    {
+        return $this->hasMany(
+            'App\Answer',
+            'questionId',
+            'id'
+        );
+    }
 
 }

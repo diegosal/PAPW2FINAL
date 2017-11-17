@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\TypeUser;
-use App\Filters\TypeUserFilter;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -30,7 +29,7 @@ class TypeUserController extends Controller
     public function update (TypeUser $typeUser)
     {
         $this->validate(request(), [
-            'type' => 'required',
+            'type' => 'sometimes|required',
         ]);
 
         $typeUser->fill(request()->all())->save();

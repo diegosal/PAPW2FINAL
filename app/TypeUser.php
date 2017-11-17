@@ -5,7 +5,6 @@ namespace App;
 use App\Filters\Filterable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Model;
 
 class TypeUser extends Model
 {

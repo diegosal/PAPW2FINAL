@@ -24,6 +24,7 @@ class User extends Authenticatable
         'birth'
     ];
     protected $guarded = ['id'];
+
     protected $casts = [
         'typeUserId' => 'integer',
         'sex' => 'integer'
@@ -41,5 +42,22 @@ class User extends Authenticatable
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function typeUser()
+    {
+        return $this->belongsTo(
+            'App\TypeUser',
+            'typeUserId'
+        );
+    }
+
+    public function userCourse()
+    {
+        return $this->hasMany(
+            'App\UserCourse',
+            'UserId',
+            'id'
+        );
     }
 }

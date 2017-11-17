@@ -4,6 +4,7 @@ namespace App\Filters;
 
 class TypeUserFilter extends QueryFilter
 {
+    
     public function type($value = null)
     {
         return $this->builder->where('type', 'like', "%$value%");

@@ -6,10 +6,10 @@ use App\Filters\Filterable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
-class Attempt extends Model
+class UserCourse extends Model
 {
     use Notifiable, Filterable;
-    protected $table = 'users';
+    protected $table = 'userCourse';
     /**
      * The attributes that are mass assignable.
      *
@@ -28,5 +28,21 @@ class Attempt extends Model
         'correctAnswers' => 'integer',
         'wrongAnswers' => 'integer'
     ];
+
+    public function training()
+    {
+        return $this->belongsTo(
+            'App\Training',
+            'trainingId'
+        );
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(
+            'App\User',
+            'UserId'
+        );
+    }
 
 }

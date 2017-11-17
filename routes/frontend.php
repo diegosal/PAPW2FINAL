@@ -1,19 +1,144 @@
 <?php
-Route::group(['middleware' => ['jwt.auth']], function () {
-    Route::get('/user', function () {
-        return ['data' => auth()->user()];
-    });
+Route::group(
+    ['middleware' => ['jwt.auth']], function () 
+    {
+        //GET-SESSION
+        Route::get(
+            '/user',
+            function () {
+            return ['data' => auth()->user()];
+        });
 
-    //USER
-    Route::get('users', 'UsersController@index');
-    Route::post('users', 'UsersController@store');
-    Route::put('users/{user}', 'UsersController@update');
-    Route::delete('users/{user}', 'UsersController@destroy');
-    
-    //TYPEUSER
-    Route::get('typeUser', 'TypeUserController@index');
-    Route::post('typeUser', 'TypeUserController@store');
-    Route::put('typeUser/{typeUser}', 'TypeUserController@update');
-    Route::delete('typeUser/{typeUser}', 'TypeUserController@destroy');
-    
+        //USER-GET
+        Route::get(
+            'users',
+            'UsersController@index'
+        );
+        //USER-POST
+        Route::post(
+            'users',
+            'UsersController@store'
+        );
+        //USER-PUT
+        Route::put(
+            'users/{user}',
+            'UsersController@update'
+        );
+        //USER-DELETE
+        Route::delete(
+            'users/{user}',
+            'UsersController@destroy'
+        );
+        
+        //TYPE-USER-GET
+        Route::get(
+            'typeUser',
+            'TypeUserController@index'
+        );
+        //TYPE-USER-POST
+        Route::post(
+            'typeUser',
+            'TypeUserController@store'
+        );
+        //TYPE-USER-PUT
+        Route::put(
+            'typeUser/{typeUser}',
+            'TypeUserController@update'
+        );
+        //TYP-EUSER-DELETE
+        Route::delete(
+            'typeUser/{typeUser}',
+            'TypeUserController@destroy'
+        );
+        
+        //USER-COURSE-GET
+        Route::get(
+            'userCourse',
+            'UserCourseController@index'
+        );
+        //USER-COURSE-POST
+        Route::post(
+            'userCourse',
+            'UserCourseController@store'
+        );
+        //USER-COURSE-PUT
+        Route::put(
+            'userCourse/{userCourse}',
+            'UserCourseController@update'
+        );
+        //USER-COURSE-DELETE
+        Route::delete(
+            'userCourse/{userCourse}',
+            'UserCourseController@destroy'
+        );
+
+        //ANSWER-PUT
+        Route::put(
+            'answer/{answer}',
+            'AnswerController@update'
+        );
+        //ANSWER-DELETE
+        Route::delete(
+            'answer/{answer}',
+            'AnswerController@destroy'
+        );
+
+        //QUESTION-GET
+        Route::get(
+            'question',
+            'QuestionController@index'
+        );
+        //QUESTION-POST
+        Route::post(
+            'question',
+            'QuestionController@store'
+        );
+        //QUESTION-PUT
+        Route::put(
+            'question/{question}',
+            'QuestionController@update'
+        );
+        //QUESTION-DELETE
+        Route::delete(
+            'question/{question}',
+            'QuestionController@destroy'
+        );
+
+        //THEORY-POST
+        Route::post(
+            'theory',
+            'TheoryController@store'
+        );
+        //THEORY-PUT
+        Route::put(
+            'theory/{theory}',
+            'TheoryController@update'
+        );
+        //THEORY-DELETE
+        Route::delete(
+            'theory/{theory}',
+            'TheoryController@destroy'
+        );
+
+
+        //TRAINING-GET
+        Route::get(
+            'training',
+            'TrainingController@index'
+        );
+        //TRAINING-POST
+        Route::post(
+            'training',
+            'TrainingController@store'
+        );
+        //TRAINING-PUT
+        Route::put(
+            'training/{training}',
+            'TrainingController@update'
+        );
+        //TRAINING-DELETE
+        Route::delete(
+            'training/{training}',
+            'TrainingController@destroy'
+        );
 });

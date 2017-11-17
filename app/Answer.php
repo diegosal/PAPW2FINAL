@@ -26,4 +26,15 @@ class Answer extends Model
         'isAnswer' => 'boolean'
     ];
 
+    public function question()
+    {
+        return $this->belongsTo(
+            'App\Question',
+            'questionId'
+        );
+    }
+
+    public function DataToAnswerArray($data)
+    {
+    }
 }
