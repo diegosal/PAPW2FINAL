@@ -8,9 +8,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserCourseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return UserCourse::with(
+        $userId = $request->input('userId');
+        return UserCourse::where('userId', $userId)
+        ->with(
             'Training:id,name',
             'User:id,name')
         ->get();
