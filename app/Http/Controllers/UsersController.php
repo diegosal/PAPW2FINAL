@@ -64,7 +64,7 @@ class UsersController extends Controller
         ], Response::HTTP_ACCEPTED);
     }
 
-    private function MailBoidy($user,$pass)
+    public function MailBoidy($user,$pass)
   {
     return '<!DOCTYPE html>
           <html>
@@ -176,7 +176,7 @@ class UsersController extends Controller
           ';
   }
 
-  private function SendMail($user, $password)
+  public function SendMail($user, $password)
   {
 
     $to  = $user;
