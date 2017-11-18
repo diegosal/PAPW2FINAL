@@ -2,20 +2,32 @@
 
 namespace App;
 
+use App\Filters\Filterable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
-
+    use Notifiable, Filterable;
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'typeUserId',
+        'name',
+        'email',
+        'password',
+        'sex',
+        'birth'
+    ];
+    protected $guarded = ['id'];
+
+    protected $casts = [
+        'typeUserId' => 'integer',
+        'sex' => 'integer'
     ];
 
     /**
@@ -26,4 +38,26 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function typeUser()
+    {
+        return $this->belongsTo(
+            'App\TypeUser',
+            'typeUserId'
+        );
+    }
+
+    public function userCourse()
+    {
+        return $this->hasMany(
+            'App\UserCourse',
+            'UserId',
+            'id'
+        );
+    }
 }
