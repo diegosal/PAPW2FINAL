@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Question;
+use App\Answer;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class QuestionController extends Controller
 {
     
-	public function index($id)
+	public function index(Request $request)
     {
+        $trainingId = $request->input('trainingId');
         return Question::where(
-            'trainingId', $id
+            'trainingId', $trainingId
         )->with(
             'Answer:id,questionId,answer,isAnswer'
         )->get();
@@ -20,47 +22,54 @@ class QuestionController extends Controller
 
     public function store(Request $request)
     {
-    	$dataQuestion = $request->input('question');
+
         $dataAnswer = $request->input('answer');
-        $questionNumber = 0;
         
-        foreach ($dataQuestion as &$valorQuestion) {
             
-            $question = new Question();
-            $question->trainingId = $valorQuestion['trainingId'];
-            $questionNumber = $valorQuestion['questionNumber'];
-            $question->question = $valorQuestion['question'];
-            $question->save();
+        $question = new Question();
+        $question->trainingId = $request
+                                ->input('trainingId');
+        $question->question =   $request
+                                ->input('question');
+        $question->save();
+        
+        foreach ($dataAnswer as &$valorAnswer) {
             
-            foreach ($dataAnswer as &$valorAnswer) {
-                
-                $answer = new Answer();
-                $answer->questionId = $question->id;
-                $answer->answer = $valorAnswer['answer'];
-                $answer->isAnswer = $valorAnswer['isAnswer'];
-                
-                if($questionNumber == $answer->questionId)
-                    $answer->save();
+            $answer = new Answer();
+            $answer->questionId = $question->id;
+            $answer->answer = $valorAnswer['answer'];
+            $answer->isAnswer = $valorAnswer['isAnswer'];
+            $answer->save();
 
-            }
-
-            return response()->json([
-            	'message' => 'Successful created'
-        	]);	
         }
-    }
-
-    public function update (Question $question)
-    {
-        $this->validate(request(), [
-            'question' => 'sometimes|required',
-        ]);
-
-        $question->fill(request()->all())->save();
 
         return response()->json([
-            'message' => 'Successful edited'
-        ]);
+        	'message' => 'Successful created'
+    	]);	
+    }
+
+    public function update (Request $request)
+    {
+        
+        $dataAnswer = $request->input('answer');
+        $questionId = $request->input('id');
+        
+        $question = Question::find($questionId);
+
+        $question->trainingId = $request
+                                ->input('trainingId');
+        $question->question =   $request
+                                ->input('question');
+        $question->save();
+        
+        foreach ($dataAnswer as &$valorAnswer) {
+            
+            $answer = Answer::find($valorAnswer['id']);
+            $answer->answer = $valorAnswer['answer'];
+            $answer->isAnswer = $valorAnswer['isAnswer'];
+            $answer->save();
+
+        }
     }
 
     public function destroy(Question $question)
