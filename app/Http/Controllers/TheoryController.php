@@ -9,6 +9,12 @@ use Symfony\Component\HttpFoundation\Response;
 class TheoryController extends Controller
 {
 
+    public function index(Request $request) 
+    {
+        $trainingId = $request->input('trainingId');
+        return Theory::where('trainingId', $trainingId)->get();
+    }
+
     public function store()
     {
         $this->validate(request(), [

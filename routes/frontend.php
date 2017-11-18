@@ -104,6 +104,12 @@ Route::group(
             'QuestionController@destroy'
         );
 
+
+        //THEORY-GET
+        Route::get(
+            'theory',
+            'TheoryController@index'
+        );
         //THEORY-POST
         Route::post(
             'theory',

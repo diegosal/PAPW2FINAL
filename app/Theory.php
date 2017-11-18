@@ -20,9 +20,19 @@ class Theory extends Model
         'url',
         'description'
     ];
+    
     protected $guarded = ['id'];
+    
     protected $casts = [
         'trainingId' => 'integer'
     ];
+
+    public function training()
+    {
+        return $this->belongsTo(
+            'App\Training',
+            'trainingId'
+        );
+    }
 
 }

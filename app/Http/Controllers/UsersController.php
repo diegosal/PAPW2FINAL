@@ -23,7 +23,7 @@ class UsersController extends Controller
             'typeUserId' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|min:4',
+            'password' => 'required|min:4',
             'sex' => 'required',
             'birth' => 'required|date',
         ]);
