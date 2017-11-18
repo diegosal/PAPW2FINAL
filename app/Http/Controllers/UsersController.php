@@ -30,7 +30,7 @@ class UsersController extends Controller
 
         $email = $request->input('email');
         $password = $request->input('password');
-        $this.SendMail($user, $password);
+        //$this.SendMail($user, $password);
         User::create(request()->all());
 
         return response()->json([
